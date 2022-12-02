@@ -2,7 +2,7 @@
 {
     public class Day01
     {
-        private static string FileName = "Inputs/Day01.txt";
+        private static readonly string FileName = "Inputs/Day01.txt";
         public static async Task Run()
         {
             var part1Answer = await Part1(FileName);
