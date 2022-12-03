@@ -23,19 +23,23 @@
             return rounds.Sum(r => r.Score);
         }
 
-        public static async Task<List<Round>> ParseFile(string fileName)
+        public static async Task<List<Round>> ParseFile(string fileName, bool part1 = true)
         {
             var linesOfInput = await File.ReadAllLinesAsync(fileName);
 
             var rounds = new List<Round>();
 
-            foreach(var line in linesOfInput)
-                rounds.Add(BuildRound(line));
+            foreach (var line in linesOfInput)
+                if (part1) rounds.Add(BuildRound_Part1(line));
+                else
+                {
+
+                }
 
             return rounds;
         }
 
-        private static Round BuildRound(string line)
+        private static Round BuildRound_Part1(string line)
         {
             var throws = line.Split(' ');
             var round = new Round
