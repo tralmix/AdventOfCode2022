@@ -2,6 +2,27 @@
 {
     public class Day02
     {
+        private static readonly string FileName = "Inputs/Day02.txt";
+        public static async Task Run()
+        {
+            Console.WriteLine("Day 1");
+
+            var part1Answer = await Part1(FileName);
+            Console.WriteLine($"The score for all rounds is {part1Answer}.");
+
+            //var part2Answer = await Part2(FileName);
+            //Console.WriteLine($"The three elves carrying the most hold a combined {part2Answer} calories");
+
+            Console.WriteLine();
+        }
+
+        public static async Task<int> Part1(string fileName)
+        {
+            var rounds = await ParseFile(fileName);
+
+            return rounds.Sum(r => r.Score);
+        }
+
         public static async Task<List<Round>> ParseFile(string fileName)
         {
             var linesOfInput = await File.ReadAllLinesAsync(fileName);
