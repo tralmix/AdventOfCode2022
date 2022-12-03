@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdventOfCode2022.Day_02
+﻿namespace AdventOfCode2022.Day_02
 {
     public class Day02
     {
@@ -12,7 +6,35 @@ namespace AdventOfCode2022.Day_02
         {
             var linesOfInput = await File.ReadAllLinesAsync(fileName);
 
-            return Array.Empty<Round>().ToList();
+            var rounds = new List<Round>();
+
+            foreach(var line in linesOfInput)
+                rounds.Add(BuildRound(line));
+
+            return rounds;
+        }
+
+        private static Round BuildRound(string line)
+        {
+            var throws = line.Split(' ');
+            var round = new Round
+            {
+                Opponent = throws[0] switch
+                {
+                    "A" => Throw.Rock,
+                    "B" => Throw.Paper,
+                    "C" => Throw.Scissors,
+                    _ => throw new NotImplementedException()
+                },
+                Self = throws[1] switch
+                {
+                    "X" => Throw.Rock,
+                    "Y" => Throw.Paper,
+                    "Z" => Throw.Scissors,
+                    _ => throw new NotImplementedException()
+                }
+            };
+            return round;
         }
     }
 

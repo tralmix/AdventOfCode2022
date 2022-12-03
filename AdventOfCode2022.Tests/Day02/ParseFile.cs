@@ -1,9 +1,4 @@
 ﻿using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCode2022.Day_02
 {
@@ -19,10 +14,10 @@ namespace AdventOfCode2022.Day_02
             rounds.Count.Should().Be(3);
         }
 
-        [Fact]
+        [Theory]
         [InlineData(0, true, false, 8)]
-        [InlineData(1, false, false, 8)]
-        [InlineData(2, false, true, 8)]
+        [InlineData(1, false, false, 1)]
+        [InlineData(2, false, true, 6)]
         public async Task ShouldHaveExpectedOutcomeAndScore(int round, bool isAWin, bool isADraw, int score)
         {
             var rounds = await Day02.ParseFile(FileName);
