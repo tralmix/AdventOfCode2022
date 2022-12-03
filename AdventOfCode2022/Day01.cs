@@ -1,16 +1,19 @@
-﻿namespace AdventOfCode2022
+﻿namespace AdventOfCode2022.Day_01
 {
     public class Day01
     {
         private static readonly string FileName = "Inputs/Day01.txt";
         public static async Task Run()
         {
+            Console.WriteLine("Day 1");
+
             var part1Answer = await Part1(FileName);
             Console.WriteLine($"The elf with the most is carrying {part1Answer} calories.");
 
             var part2Answer = await Part2(FileName);
             Console.WriteLine($"The three elves carrying the most hold a combined {part2Answer} calories");
 
+            Console.WriteLine();
         }
 
         public static async Task<long> Part1(string fileName)
