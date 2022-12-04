@@ -5,7 +5,7 @@
         private static readonly string FileName = "Inputs/Day02.txt";
         public static async Task Run()
         {
-            Console.WriteLine("Day 1");
+            Console.WriteLine("Day 2");
 
             var part1Answer = await Part1(FileName);
             Console.WriteLine($"The score for all rounds is {part1Answer}.");
