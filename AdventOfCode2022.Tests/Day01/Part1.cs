@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-
-namespace AdventOfCode2022.Day_01
+﻿namespace AdventOfCode2022.Day_01
 {
     public  class Part1
     {
