@@ -10,12 +10,25 @@
 
             var part1Answer = await Part1(FileName);
             Console.WriteLine($"The number of complete subsets is {part1Answer}.");
+
+            var part2Answer = await Part2(FileName);
+            Console.WriteLine($"The number of overlapping sets is {part2Answer}.");
         }
+
         public static async Task<int> Part1(string fileName)
         {
             var pairs = await ParseFile(fileName);
 
             var subsets = GetPairsWithCompleteSubsets(pairs);
+
+            return subsets.Count;
+        }
+
+        public static async Task<int> Part2(string fileName)
+        {
+            var pairs = await ParseFile(fileName);
+
+            var subsets = GetPairsWithOverlaps(pairs);
 
             return subsets.Count;
         }
@@ -34,6 +47,11 @@
         public static List<Pair> GetPairsWithCompleteSubsets(List<Pair> input)
         {
             return input.Where(p => p.CompleteSubsetExists).ToList();
+        }
+
+        public static List<Pair> GetPairsWithOverlaps(List<Pair> input)
+        {
+            return input.Where(p => p.OverlapsExists).ToList();
         }
     }
 
@@ -73,6 +91,8 @@
                 return false;
             }
         }
+
+        public bool OverlapsExists => First.Sections.Any(s => Second.Sections.Contains(s));
     }
 
     public class Elf
