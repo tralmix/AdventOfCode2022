@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-
-namespace AdventOfCode2022.Day_03
+﻿namespace AdventOfCode2022.Day_03
 {
     public class ParseFile
     {
