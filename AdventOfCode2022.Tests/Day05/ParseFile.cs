@@ -21,9 +21,9 @@
         }
 
         [Theory]
-        [InlineData(0,1)]
-        [InlineData(1,1)]
-        [InlineData(2,4)]
+        [InlineData(0,2)]
+        [InlineData(1,3)]
+        [InlineData(2,1)]
         public async Task StacksShouldContainExpectedQuantity(int stack, int count)
         {
             var ship = await Day05.ParseFile(FileName);
@@ -33,9 +33,9 @@
 
         [Theory]
         [InlineData(0,1,2,1)]
-        [InlineData(1,1,2,1)]
-        [InlineData(2,1,2,1)]
-        [InlineData(3,1,2,1)]
+        [InlineData(1,3,1,3)]
+        [InlineData(2,2,2,1)]
+        [InlineData(3,1,1,2)]
 
         public async Task InstructionsShouldBeAsExpected(int instruction, int count, int source, int target)
         {
