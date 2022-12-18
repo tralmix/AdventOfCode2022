@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode2022.Day_05
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace AdventOfCode2022.Day_05
 {
     public class Day05
     {
@@ -25,6 +27,7 @@
         {
             var linesOfInput = await File.ReadAllLinesAsync(fileName);
 
+
             return new Ship();
         }
     }
@@ -32,10 +35,19 @@
     public class Ship
     {
         public List<ContainerStack> Stacks { get; set; } = new();
+
+        public List<Instruction> Instructions { get; set; } = new();
     }
 
     public class ContainerStack
     {
         public Stack<char> Containers { get; set; } = new();
+    }
+
+    public class Instruction
+    {
+        public int CountToMove { get; set; }
+        public int SourceStack { get; set; }
+        public int TargetStack { get; set; }
     }
 }
