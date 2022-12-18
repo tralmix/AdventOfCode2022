@@ -13,6 +13,8 @@
 
             var part2Answer = await Part2(FileName);
             Console.WriteLine($"The number of overlapping sets is {part2Answer}.");
+
+            Console.WriteLine();
         }
 
         public static async Task<int> Part1(string fileName)
