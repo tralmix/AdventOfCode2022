@@ -32,7 +32,7 @@
             return int.MinValue;
         }
 
-        public static async Task<Directory_AoC> ParseFile(string fileName)
+        public static async Task<Directory_AoC?> ParseFile(string fileName)
         {
             var linesOfInput = await File.ReadAllLinesAsync(fileName);
 
@@ -45,13 +45,16 @@
                 if(input is Command)
                 {
                     var command = (Command)input;
-                    if(command.Name.Equals("cd"))
-                        if(command.Args?.Equals("..") ?? false)
-                            active = active?.Parent;
-                        else if(command.Args?.Equals("/") ?? false)
-                            active = root;
-                        else
-                            active = active?.SubDirectories.First(x=>x.Name.Equals(command.Args));
+                    if(!command.Name.Equals("cd"))
+                        continue;
+
+                    active = command.Args switch 
+                    {
+                        ".." => active?.Parent,
+                        "/" => root,
+                        _ => active?.SubDirectories.First(x=>x.Name.Equals(command.Args))
+                    };
+                    
                     continue;
                 }
 
