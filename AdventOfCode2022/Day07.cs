@@ -12,7 +12,7 @@
             Console.WriteLine($"The directories under max size are {part1Answer}.");
 
             var part2Answer = await Part2(FileName);
-            Console.WriteLine($"The top containers are {part2Answer}.");
+            Console.WriteLine($"The size of the directory being deleted is {part2Answer}.");
 
             Console.WriteLine();
         }
@@ -28,11 +28,21 @@
 
         public static async Task<int> Part2(string fileName)
         {
-            var file = await ParseFile(fileName);
-            return int.MinValue;
+            const int totalSpace = 70000000;
+            const int spaceNeeded = 30000000;
+
+            var root = await ParseFile(fileName);
+
+            var freeSpace = totalSpace - root.Size;
+            
+            var spaceToBeDeleted = spaceNeeded-freeSpace;
+            
+            var directory = GetDirectoryToDelete(root, spaceToBeDeleted);
+
+            return directory.Size;
         }
 
-        public static async Task<Directory_AoC?> ParseFile(string fileName)
+        public static async Task<Directory_AoC> ParseFile(string fileName)
         {
             var linesOfInput = await File.ReadAllLinesAsync(fileName);
 
@@ -115,6 +125,27 @@
                 under.AddRange(GetDirectoriesUnderMax(max, directory.SubDirectories.ToArray()));
             }
             return under;
+        }
+
+        private static Directory_AoC GetDirectoryToDelete(Directory_AoC toSearch, int spaceToBeDeleted)
+        {
+            var directories = GetDirectoriesBigEnoughToDelete(toSearch, spaceToBeDeleted);
+            
+            return directories.OrderBy(d=>d.Size).First();
+        }
+
+        private static IEnumerable<Directory_AoC> GetDirectoriesBigEnoughToDelete(Directory_AoC toSearch, int spaceToBeDeleted)
+        {
+            var over = new List<Directory_AoC>();
+            foreach(var directory in toSearch.SubDirectories)
+            {
+                if(directory.Size < spaceToBeDeleted)
+                    continue;
+                
+                over.Add(directory);
+                over.AddRange(GetDirectoriesBigEnoughToDelete(directory, spaceToBeDeleted));
+            }
+            return over;
         }
     }
 
