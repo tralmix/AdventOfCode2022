@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata;
-
-namespace AdventOfCode2022.Day_06
+﻿namespace AdventOfCode2022.Day_06
 {
     public class Day06
     {
