@@ -52,22 +52,36 @@
         private static int FindMarker(string input, int bufferSize)
         {
             var characterCount = bufferSize;
-            var buffer = input.Take(characterCount);
+            var dictionary = input.Take(characterCount)
+                .GroupBy(b=>b).ToDictionary(k=>k.Key, v=>v.Count());
 
             while (true)
             {
-                if (buffer.Distinct().Count() == bufferSize)
+                if (dictionary.Count() == bufferSize)
                     break;
 
                 if (characterCount > input.Length)
                     throw new IndexOutOfRangeException("Character counter exceeded input length");
 
-                buffer = buffer.TakeLast(bufferSize - 1).Append(input[characterCount]);
+                var character = input[characterCount];
+
+                ReduceOrRemoveFromDictionary(dictionary, input[characterCount-bufferSize]);
+
+                if (!dictionary.TryAdd(character, 1))
+                    dictionary[character]++;
+
                 characterCount++;
             }
 
             return characterCount;
             
+        }
+
+        private static void ReduceOrRemoveFromDictionary(Dictionary<char, int> dictionary, char character)
+        {
+            if (dictionary.TryGetValue(character, out var count))
+                if (count == 1) dictionary.Remove(character);
+                else dictionary[character]--;
         }
     }
 }
