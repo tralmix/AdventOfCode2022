@@ -1,15 +1,14 @@
-﻿namespace AdventOfCode2022.Day_04
+﻿namespace AdventOfCode2022.Day_04;
+
+public class Part2
 {
-    public class Part2
+    private const string FileName = "Day04/Input.txt";
+
+    [Fact]
+    public async Task ShouldFindFourOverlappingSets()
     {
-        private const string FileName = "Day04/Input.txt";
+        var subsets = await Day04.Part2(FileName);
 
-        [Fact]
-        public async Task ShouldFindFourOverlappingSets()
-        {
-            var subsets = await Day04.Part2(FileName);
-
-            subsets.Should().Be(4);
-        }
+        subsets.Should().Be(4);
     }
 }
